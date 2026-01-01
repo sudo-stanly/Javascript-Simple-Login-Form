@@ -46,17 +46,14 @@ form.addEventListener("submit",(e)=>{
     const passwVal = password_field[0].value.toLowerCase().trim();
     const nodeList = warning_containers;
 
+    // setTimeout -> after time out -> validation, while timeout, reload and disable the button.
+
     if(emailVal===""&&passwVal===""){
-        // submitBtn.disabled=true;
-        // btn_text.style.display="none";
-        // btn_load.style.display="flex";
-        // submitBtn.style.cursor="grab";
         console.warn("Both Fields are Empty!");
 
         for(let i=0; i < nodeList.length; i++){
             console.info(nodeList[i]);
             nodeList[i].style.display="flex";
-            // nodeList[i].classList.toggle("all-fields-empty");
         }
 
         for(let i=0; i<msgList.length; i++){
@@ -87,9 +84,9 @@ form.addEventListener("submit",(e)=>{
         return true;
     }
 
-    // for(let i=0; i<nodeList.length; i++){
-    //     nodeList[i].style.display="none";
-    // }
+    for(let i=0; i<nodeList.length; i++){
+        nodeList[i].style.display="none";
+    }
     
     return;
 });
