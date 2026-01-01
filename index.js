@@ -118,23 +118,13 @@ form.addEventListener("submit",(e)=>{
             console.info(error_box);
 
             error_box.style.display="block";
-
-
-            // slide back up           
+        
             const timeout = setTimeout(clear_error_message, 5000);
             function clear_error_message(){
                 let error_box_message = document.querySelector(".error-box-msg");
                 error_box_message.style.transition="1s ease";
-                // error_box_message.style.transform="translateY(-1000px)";
-
                 error_box.style.display="none";
                 console.info(error_box);
-
-                // const timeout2 = setTimeout(hide_error_message, 10000);
-                // function hide_error_message(){
-                //     error_box.style.display="none";
-                //     console.info("Message error hidden.");
-                // }
             }
             
             return false;
