@@ -48,45 +48,67 @@ form.addEventListener("submit",(e)=>{
 
     // setTimeout -> after time out -> validation, while timeout, reload and disable the button.
 
-    if(emailVal===""&&passwVal===""){
-        console.warn("Both Fields are Empty!");
+    submitBtn.disabled=true;
+    btn_text.style.display="none";
+    btn_load.style.display="flex";
+    submitBtn.style.cursor="grab";
+    const validateForm = setTimeout(validate, 3000);
+    function validate(){
+        if(emailVal===""&&passwVal===""){
+            console.warn("Both Fields are Empty!");
 
-        for(let i=0; i < nodeList.length; i++){
-            console.info(nodeList[i]);
-            nodeList[i].style.display="flex";
+            for(let i=0; i < nodeList.length; i++){
+                console.info(nodeList[i]);
+                nodeList[i].style.display="flex";
+            }
+
+            for(let i=0; i<msgList.length; i++){
+                console.info(msgList[i]);
+                msgList[i].innerHTML="";
+                msgList[i].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
+            }
+            submitBtn.disabled=false;
+            btn_text.style.display="block";
+            btn_load.style.display="none";
+            submitBtn.style.cursor="pointer";
+            return true;
         }
+        if(emailVal!==""&&passwVal===""){
+            console.warn("Password Field is Empty!");
 
-        for(let i=0; i<msgList.length; i++){
-            console.info(msgList[i]);
-            msgList[i].innerHTML="";
-            msgList[i].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
+            nodeList[0].style.display="none";
+            nodeList[1].style.display="flex";
+            msgList[1].innerHTML="";
+            msgList[1].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
+            
+            submitBtn.disabled=false;
+            btn_text.style.display="block";
+            btn_load.style.display="none";
+            submitBtn.style.cursor="pointer";
+            return true;
         }
-        return true;
-    }
-    if(emailVal!==""&&passwVal===""){
-        console.warn("Password Field is Empty!");
+        if(emailVal===""&&passwVal!==""){
+            console.warn("Email Field is Empty!");
 
-        nodeList[0].style.display="none";
-        nodeList[1].style.display="flex";
-        msgList[1].innerHTML="";
-        msgList[1].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
+            nodeList[0].style.display="flex";
+            msgList[0].innerHTML="";
+            msgList[0].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
+            nodeList[1].style.display="none";
         
-        return true;
-    }
-    if(emailVal===""&&passwVal!==""){
-        console.warn("Email Field is Empty!");
+            submitBtn.disabled=false;
+            btn_text.style.display="block";
+            btn_load.style.display="none";
+            submitBtn.style.cursor="pointer";
+            return true;
+        }
 
-        nodeList[0].style.display="flex";
-        msgList[0].innerHTML="";
-        msgList[0].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
-        nodeList[1].style.display="none";
-    
-        return true;
+        submitBtn.disabled=false;
+        btn_text.style.display="block";
+        btn_load.style.display="none";
+        submitBtn.style.cursor="pointer";
+        for(let i=0; i<nodeList.length; i++){
+            nodeList[i].style.display="none";
+        }
     }
-
-    for(let i=0; i<nodeList.length; i++){
-        nodeList[i].style.display="none";
-    }
-    
     return;
 });
