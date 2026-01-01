@@ -42,8 +42,8 @@ form.addEventListener("submit",(e)=>{
     console.info("Validating Form...");
 
     const msgList = document.querySelectorAll(".warning-msg");
-    const emailVal = email_field[0].value.toLowerCase().trim();
-    const passwVal = password_field[0].value.toLowerCase().trim();
+    const emailVal = email_field[0].value.toLowerCase();
+    const passwVal = password_field[0].value.toLowerCase();
     const nodeList = warning_containers;
 
     // setTimeout -> after time out -> validation, while timeout, reload and disable the button.
@@ -111,9 +111,15 @@ form.addEventListener("submit",(e)=>{
         }
 
         const users=["avril@yahoo.com", "bonjovi@outlook.com", "admin@gmail.com"];
-        const isUser = users.some((user)=>{user.toLowerCase() === user.trim()});
-        if(!isUser){
-            console.warn("No users found!"); 
+        let isUser = false;
+        users.forEach((user)=>{
+            console.info(user);
+            if(user.toLowerCase().trim() === emailVal){
+                isUser=true;
+            }
+        });
+        if(isUser===false){
+            console.warn("No user found.");
             let error_box = document.querySelector(".error-box");
             console.info(error_box);
 
@@ -128,8 +134,30 @@ form.addEventListener("submit",(e)=>{
             }
             
             return false;
-        }
 
+            return false;
+        }
+        else{
+            submitBtn.disabled=true;
+            btn_text.style.display="none";
+            btn_load.style.display="flex";
+            submitBtn.style.cursor="grab";
+
+            document.querySelector(".success-box").style.display="block";
+            const timeout = setTimeout(clear_success_message, 5000);
+            function clear_success_message(){
+                let success_box_message = document.querySelector(".success-box-msg");
+                success_box_message.style.transition="1s ease";
+                success_box_message.style.display="none";
+                console.info(success_box_message);
+            }
+
+            const timeout2 = setTimeout(redirect, 8000);
+            function redirect(){
+                window.location.href="home.html";
+            }
+            return true;
+        }
     }
     return;
 });
