@@ -201,9 +201,9 @@ form>div:nth-child(2)>div{
     display: flex;
 }
 /* all fields empty */
-#warning-container.all-fields-empty{
+/* #warning-container.all-fields-empty{
     display: flex;
-}
+} */
 /* .warning-message-text{
    
 } */

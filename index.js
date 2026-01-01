@@ -16,10 +16,6 @@ let submitBtn = document.getElementById("submit-btn");
 let btn_text = document.getElementById("btn-text");
 let btn_load = document.querySelector(".buttonload");
 
-const msgList = document.querySelectorAll(".warning-msg");
-const emailVal = email_field[0].value.toLowerCase().trim();
-const passwVal = password_field[0].value.toLowerCase().trim();
-const nodeList = warning_containers;
 
 let count = 0;
 function showPassword(){
@@ -45,17 +41,22 @@ form.addEventListener("submit",(e)=>{
     console.clear();
     console.info("Validating Form...");
 
+    const msgList = document.querySelectorAll(".warning-msg");
+    const emailVal = email_field[0].value.toLowerCase().trim();
+    const passwVal = password_field[0].value.toLowerCase().trim();
+    const nodeList = warning_containers;
+
     if(emailVal===""&&passwVal===""){
-        submitBtn.disabled=true;
-        btn_text.style.display="none";
-        btn_load.style.display="flex";
-        submitBtn.style.cursor="grab";
-        bufferButton();
+        // submitBtn.disabled=true;
+        // btn_text.style.display="none";
+        // btn_load.style.display="flex";
+        // submitBtn.style.cursor="grab";
         console.warn("Both Fields are Empty!");
 
         for(let i=0; i < nodeList.length; i++){
             console.info(nodeList[i]);
-            nodeList[i].classList.toggle("all-fields-empty");
+            nodeList[i].style.display="flex";
+            // nodeList[i].classList.toggle("all-fields-empty");
         }
 
         for(let i=0; i<msgList.length; i++){
@@ -66,11 +67,6 @@ form.addEventListener("submit",(e)=>{
         return true;
     }
     if(emailVal!==""&&passwVal===""){
-        submitBtn.disabled=true;
-        btn_text.style.display="none";
-        btn_load.style.display="flex";
-        submitBtn.style.cursor="grab";
-        bufferButton();
         console.warn("Password Field is Empty!");
 
         nodeList[0].style.display="none";
@@ -81,11 +77,6 @@ form.addEventListener("submit",(e)=>{
         return true;
     }
     if(emailVal===""&&passwVal!==""){
-        submitBtn.disabled=true;
-        btn_text.style.display="none";
-        btn_load.style.display="flex";
-        submitBtn.style.cursor="grab";
-        bufferButton();
         console.warn("Email Field is Empty!");
 
         nodeList[0].style.display="flex";
@@ -95,20 +86,10 @@ form.addEventListener("submit",(e)=>{
     
         return true;
     }
-    
 
-    const sampleData=["Admin@gmail.com", "User@outlook.com", "Summit@yahoo.com"];
-    const isUser = sampleData.some((user)=>{user.toLowerCase() === user.trim()});
-   
+    // for(let i=0; i<nodeList.length; i++){
+    //     nodeList[i].style.display="none";
+    // }
+    
     return;
 });
-function bufferButton(){
-    let buffer = setTimeout(reloadBtn,3000);
-    function reloadBtn(){
-        btn_text.style.display="block";
-        btn_load.style.display="none";
-        submitBtn.disabled=false;
-        submitBtn.style.cursor="pointer";
-    }
-    return true;
-}
