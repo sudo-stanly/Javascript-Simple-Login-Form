@@ -186,7 +186,7 @@ form>div:nth-child(2)>div{
     display: none;
     overflow: hidden;
 }
-#warning-container>p,#warning-container span{
+#warning-container>p,#warning-container>span{
     animation: slide-down 0.5s ease;
 }
 
