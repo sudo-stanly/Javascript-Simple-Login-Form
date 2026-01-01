@@ -16,6 +16,11 @@ let submitBtn = document.getElementById("submit-btn");
 let btn_text = document.getElementById("btn-text");
 let btn_load = document.querySelector(".buttonload");
 
+const msgList = document.querySelectorAll(".warning-msg");
+const emailVal = email_field[0].value.toLowerCase().trim();
+const passwVal = password_field[0].value.toLowerCase().trim();
+const nodeList = warning_containers;
+
 let count = 0;
 function showPassword(){
     count+=1;
@@ -39,16 +44,13 @@ form.addEventListener("submit",(e)=>{
     e.preventDefault();
     console.clear();
     console.info("Validating Form...");
-    submitBtn.disabled=true;
-    btn_text.style.display="none";
-    btn_load.style.display="flex";
-
-    const emailVal = email_field[0].value.toLowerCase().trim();
-    const passwVal = password_field[0].value.toLowerCase().trim();
-
-    const nodeList = warning_containers;
 
     if(emailVal===""&&passwVal===""){
+        submitBtn.disabled=true;
+        btn_text.style.display="none";
+        btn_load.style.display="flex";
+        submitBtn.style.cursor="grab";
+        bufferButton();
         console.warn("Both Fields are Empty!");
 
         for(let i=0; i < nodeList.length; i++){
@@ -56,31 +58,34 @@ form.addEventListener("submit",(e)=>{
             nodeList[i].classList.toggle("all-fields-empty");
         }
 
-        const msgList = document.querySelectorAll(".warning-msg");
         for(let i=0; i<msgList.length; i++){
             console.info(msgList[i]);
             msgList[i].innerHTML="";
             msgList[i].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
         }
-        setInterval(() => {
-            btn_text.style.display="block";
-            btn_load.style.display="none";
-            console.log('Counter stopped');
-            clearInterval();
-        }, 1000);
         return true;
     }
     if(emailVal!==""&&passwVal===""){
+        submitBtn.disabled=true;
+        btn_text.style.display="none";
+        btn_load.style.display="flex";
+        submitBtn.style.cursor="grab";
+        bufferButton();
         console.warn("Password Field is Empty!");
 
         nodeList[0].style.display="none";
         nodeList[1].style.display="flex";
         msgList[1].innerHTML="";
         msgList[1].innerHTML+=`<div class="warning-message-text"><p><span>ⓘ Field cannot be empty.</span></p></div>`;
-
+        
         return true;
     }
     if(emailVal===""&&passwVal!==""){
+        submitBtn.disabled=true;
+        btn_text.style.display="none";
+        btn_load.style.display="flex";
+        submitBtn.style.cursor="grab";
+        bufferButton();
         console.warn("Email Field is Empty!");
 
         nodeList[0].style.display="flex";
@@ -95,41 +100,15 @@ form.addEventListener("submit",(e)=>{
     const sampleData=["Admin@gmail.com", "User@outlook.com", "Summit@yahoo.com"];
     const isUser = sampleData.some((user)=>{user.toLowerCase() === user.trim()});
    
-    
-
-    // setInterval((s) => {
-    //     console.info(s);
-    //     console.log('Counter stopped');
-    // }, 5000);
-
-
-    // click+=1;
-    // if(click === 1){
-    //     console.info(click);
-    //     if(!isUser){
-    //         showErrorMessage();
-    //     }
-    //     click=0;
-    //     return false;
-    // }
     return;
 });
-// function showErrorMessage(){
-//     console.warn("No users found!"); 
-//     let error_box = document.querySelector(".error-box");
-//     error_box.style.display="block";
-
-//     // slide back up           
-//     let timeout = setTimeout(clear_error_message, 5000);
-//     function clear_error_message(){
-//         let error_box_message = document.querySelector(".error-box-msg");
-//         error_box_message.style.transition="1s ease";
-//         error_box_message.style.transform="translateY(-1000px)";
-//     }
-//     let timeout2 = setTimeout(hide_error_message, 1000);
-//     function hide_error_message(){
-//         error_box.style.display="none";
-//         console.info("Message error hidden.");
-//     } 
-//     click = 0;
-// }
+function bufferButton(){
+    let buffer = setTimeout(reloadBtn,3000);
+    function reloadBtn(){
+        btn_text.style.display="block";
+        btn_load.style.display="none";
+        submitBtn.disabled=false;
+        submitBtn.style.cursor="pointer";
+    }
+    return true;
+}
