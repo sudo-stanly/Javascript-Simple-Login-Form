@@ -132,9 +132,6 @@ form.addEventListener("submit",(e)=>{
                 error_box.style.display="none";
                 console.info(error_box);
             }
-            
-            return false;
-
             return false;
         }
         else{
