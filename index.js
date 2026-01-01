@@ -52,7 +52,7 @@ form.addEventListener("submit",(e)=>{
     btn_text.style.display="none";
     btn_load.style.display="flex";
     submitBtn.style.cursor="grab";
-    const validateForm = setTimeout(validate, 3000);
+    const validateForm = setTimeout(validate, 1000);
     function validate(){
         if(emailVal===""&&passwVal===""){
             console.warn("Both Fields are Empty!");
